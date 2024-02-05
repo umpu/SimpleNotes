@@ -8,16 +8,33 @@
 import SwiftUI
 import SwiftData
 
+enum FocusText {
+    case title, details
+}
+
 struct EditNoteView: View {
     @Bindable var note: Note
+    @FocusState private var focusField: FocusText?
     
     var body: some View {
         VStack {
-            TextField("Новая заметка", text: $note.title).font(.title).bold()
+            TextField("Новая заметка", text: $note.title)
+                .font(.title)
+                .bold()
+                .focused($focusField, equals: .title)
+                .submitLabel(.next)
+                .onSubmit {
+                    focusField = .details
+                }
+            
             TextEditor(text: $note.details)
+                .focused($focusField, equals: .details)
         }
         .padding()
         .navigationBarTitleDisplayMode(.inline)
+        .onAppear {
+            focusField = .title
+        }
     }
 }
 

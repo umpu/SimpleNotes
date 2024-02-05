@@ -25,7 +25,7 @@ struct EditNoteView: View {
     do {
         let config = ModelConfiguration(isStoredInMemoryOnly: true)
         let container = try ModelContainer(for: Note.self, configurations: config)
-        let example = Note(title: "Новая заметка", details: "Пример текста новой заметки, которая должна выходить в три стоки. Или больше, для болеее показательного случая.\n\nВторой абзац начался. Уж небо осенью дышало, и всё немедля обветшало и никуда и никому и только ему единственному одному.")
+        let example = Note(title: "Новая заметка", details: "Пример текста новой заметки, которая должна выходить в три стоки. Или больше, для болеее показательного случая.")
         return EditNoteView(note: example)
             .modelContainer(container)
     } catch {
